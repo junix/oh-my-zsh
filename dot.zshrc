@@ -8,6 +8,7 @@ export ZSH=${ZSH_PROJECT}
 ZSH_THEME="bullet-train"
 BULLETTRAIN_PROMPT_CHAR=''
 BULLETTRAIN_PROMPT_SEPARATE_LINE=false
+BULLETTRAIN_DIR_EXTENDED=0
 BULLETTRAIN_PROMPT_ORDER=(
    status
    custom
@@ -45,6 +46,20 @@ plugins=(brew)
 plugins=(z)
 plugins=(zsh-autosuggestions)
 # === END plugins === }}}
+
+# === BEGIN misc === {{{
+export LANG=en_US.UTF-8
+
+export ARCHFLAGS="-arch x86_64"
+
+DEFAULT_USER="junix"
+
+export EDITOR=nvim
+
+export PATH=${HOME}/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH="/usr/local/opt/qt5/bin:$PATH"
+# === END misc === }}}
 
 # === BEGIN ZSH HISTORY UTILITIES === {{{
 bindkey '^R' history-incremental-search-backward
@@ -99,7 +114,7 @@ bindkey "\e\e" sudo-command-line
 ## === END SUDO === }}}
 
 # === BEGIN git.brew === {{{
-export HOMEBREW_GITHUB_API_TOKEN="84ac686900d66326f900b9be04ae3942346ec385"
+export HOMEBREW_GITHUB_API_TOKEN="c2a8aeb33d840fe4b0fde8347fd1b08ee241ca6a"
 # === END git.brew === }}}
 
 # === BEGIN JAVA === {{{
@@ -116,7 +131,7 @@ jdk18
 alias javac="javac -J-Dfile.encoding=utf8"
 # === END JAVA === }}}
 
-# === BEGIN Haskell === {{{
+# === BEGIN HASKELL === {{{
 
 export PATH=/Users/junix/.cabal/bin:${PATH}
 export PATH=/Users/junix/.local/bin:${PATH}
@@ -137,7 +152,8 @@ fi
 
 # === BEGIN PYTHON === {{{
 # === 'z' 需要使用python3.x的环境 ===
-export PYTHONPATH="/usr/local/lib/python3.6/site-packages:${PYTHONPATH}"
+
+alias z="/usr/local/lib/python3.6/site-packages z"
 # === END PYTHON === }}}
 
 # === BEGIN MARKDOWN === {{{
@@ -149,7 +165,7 @@ function md2html {
 
 # === BEGIN VIM === {{{
 # === Vim8.0 需要使用python2的环境 ===
-alias vim='env PYTHONPATH=/usr/local/lib/python2.7/site-packages /usr/local/Cellar/vim/8.0.0225/bin/vim'
+alias vim='env PYTHONPATH=/usr/local/lib/python2.7/site-packages /usr/local/bin/vim'
 
 # === vi 使用neovim ===
 alias vi=nvim
@@ -188,8 +204,6 @@ plugins=(z)
 alias -s html=subl # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
 alias -s rb=subl   # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
 alias -s erl=vim   # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
-alias -s sh=vim    # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
-alias -s py=vi     # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
 alias -s js=vi
 alias -s c=vi
 alias -s java=vi
@@ -208,13 +222,32 @@ export PATH=/opt/anaconda3/bin:${PATH}
 source ${ZSH_PROJECT}/hosts.alias
 # === END HOSTS ALIAS === }}}
 
-export LANG=en_US.UTF-8
+# === BEGIN DB === {{{
+skydb() {
+  env PYTHONPATH=/usr/local/lib/python2.7/site-packages mycli -h 172.17.128.172 -u yxt -p pwdasdwx  skyeye
+}
+# === END DB === }}}
 
-export ARCHFLAGS="-arch x86_64"
+source /Users/junix/pyml3.6/bin/activate
+export PYTHONPATH="/Users/junix/pyml3.6/lib/python3.6/site-packages"
 
-DEFAULT_USER="junix"
+alias c='mosh root@188.166.221.195'
 
-export EDITOR=nvim
 
-export PATH=${HOME}/bin:$PATH
-export PATH=/usr/local/bin:$PATH
+function to8kwav {
+        FILE_NAME=$(echo $1 | sed 's/\(.*\)\..*/\1/')
+        ffmpeg -i $1 -acodec pcm_s16le -ar 8000  ${FILE_NAME}.wav
+}
+
+source ~/.oh-my-zsh/plugins/zsh-vcs-prompt/zshrc.sh
+ZSH_VCS_PROMPT_ENABLE_CACHING='true'
+RPROMPT='$(vcs_super_info)'
+
+
+alias job_db="mycli -h 122.193.203.182 -u yxt -D octopus  -p  g7j4nmaU7YjEY6yqYh7NX9CY"
+
+
+# === BEGIN ANACONDA === {{{
+alias note="unset PYTHONPATH && /opt/anaconda/bin/jupyter_mac.command"
+# === END ANACONDA === }}}
+
