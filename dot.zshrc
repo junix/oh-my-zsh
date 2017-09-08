@@ -251,3 +251,9 @@ alias job_db="mycli -h 122.193.203.182 -u yxt -D octopus  -p  g7j4nmaU7YjEY6yqYh
 alias note="unset PYTHONPATH && /opt/anaconda/bin/jupyter_mac.command"
 # === END ANACONDA === }}}
 
+
+py_env() {
+	source ~/py3.6/bin/activate && unset PYTHONPATH
+}
+
+alias py='source ~/py3.6/bin/activate && unset PYTHONPATH && ipython'
